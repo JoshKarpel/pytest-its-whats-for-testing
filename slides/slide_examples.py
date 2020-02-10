@@ -4,6 +4,7 @@ def test():
 
 ###
 
+
 @pytest.fixture
 def db():
     db = Database()
@@ -17,25 +18,18 @@ def test(db):
 
 ###
 
-@pytest.mark.parametrize(
-    'input, output',
-    [
-        (1, 2),
-        (2, 4),
-    ]
-)
+
+@pytest.mark.parametrize("input, output", [(1, 2), (2, 4)])
 def test(input, output):
     assert input * 2 == output
 
 
 ###
 
+
 def pytest_generate_tests(metafunc):
     if "range" in metafunc.fixturenames:
-        metafunc.parametrize(
-            "range",
-            [list(range(n)) for n in range(5)],
-        )
+        metafunc.parametrize("range", [list(range(n)) for n in range(5)])
 
 
 def test(range):
