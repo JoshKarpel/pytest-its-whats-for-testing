@@ -5,13 +5,13 @@ import pytest
 
 @pytest.fixture
 def parent():
-    pass
+    return 1
 
 
 @pytest.fixture
 def child(parent):
-    pass
+    return parent + 2
 
 
 def test_foo(child):
-    pass
+    assert child == 3

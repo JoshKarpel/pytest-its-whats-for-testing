@@ -1,3 +1,5 @@
+# pytest-xdist parallelizes your tests
+
 import pytest
 
 import time
