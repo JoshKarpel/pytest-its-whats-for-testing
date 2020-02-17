@@ -1,4 +1,5 @@
 # fixtures are "shared setup functions"
+# use them to reduce duplication and clarify intent
 
 import pytest
 

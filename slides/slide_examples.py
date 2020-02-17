@@ -34,3 +34,11 @@ def pytest_generate_tests(metafunc):
 
 def test(range):
     assert sum(range) == range[-1] * (range[-1] + 1) / 2
+
+
+###
+
+@pytest.mark.django_db
+def test_my_user():
+    me = User.objects.get(username='me')
+    assert me.is_superuser

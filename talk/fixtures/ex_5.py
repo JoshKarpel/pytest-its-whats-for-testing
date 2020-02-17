@@ -1,4 +1,5 @@
 # fixtures have scope
+# we can see the scoping by running pytest --setup-show/plan
 
 import pytest
 
