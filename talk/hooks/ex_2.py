@@ -15,4 +15,4 @@ def db(db_type):
 
 
 def test_foo(db):
-    pass
+    assert db

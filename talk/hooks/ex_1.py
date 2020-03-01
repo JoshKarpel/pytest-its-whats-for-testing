@@ -6,7 +6,7 @@ import os
 
 
 def pytest_generate_tests(metafunc):
-    if 'foo' in metafunc.fixturenames:
+    if "foo" in metafunc.fixturenames:
         metafunc.parametrize("foo", ['foobar', 'wizbang'])
 
 

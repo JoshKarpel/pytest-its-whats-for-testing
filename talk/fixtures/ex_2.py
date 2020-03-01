@@ -5,14 +5,13 @@ import pytest
 
 
 @pytest.fixture
-def transaction():
-    txn = object()
-    print(f"fixture created {txn}")
+def file():
+    with open('foo/file.txt', mode = 'w') as file:
+        print(f"fixture created {file}")
+        yield file
+        print(f"back in the fixture with {file}")
+    print('after with block')
 
-    yield txn
 
-    print(f"back in the fixture with {txn}")
-
-
-def test_the_database(transaction):
-    assert transaction
+def test_the_file(file):
+    assert file.write('hello') > 0

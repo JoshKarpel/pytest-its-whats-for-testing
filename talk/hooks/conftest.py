@@ -4,7 +4,7 @@ def pytest_addoption(parser):
         action = 'store',
         nargs = '+',
         help = "which databases to test against",
-        default = ['postgresql'],
+        default = ['sqlite3'],
         required = False,
     )
 
