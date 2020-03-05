@@ -1,4 +1,4 @@
 pytest
 pytest-xdist
 pytest-timeout
-hypothesis
+pytest-mock

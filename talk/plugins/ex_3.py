@@ -1,34 +1,25 @@
-# hypothesis is lets you do property-based testing
+# pytest-mock wraps the stdlib unittest.mock module, plus some extras
 
 import pytest
 
-import hypothesis
-from hypothesis import strategies
+from pathlib import Path
 
 
-def truncate(string, length):
-    if 'x' in string:
-        return string
-    return string[:length]
+def test_mock(mocker):
+    assert Path('this-file-does-not-exist').exists()
 
 
-@pytest.mark.parametrize(
-    'string, length',
-    [
-        ('foobar', 3),
-        ('wizbang', 4),
-        ('short', 10),
-    ]
-)
-def test_truncate(string, length):
-    result = truncate(string, length)
-    assert len(result) <= length
+class Multiplier:
+    def double(self, x):
+        return 2 * x
+
+    def quadruple(self, x):
+        return self.double(self.double(x))
 
 
-# @hypothesis.given(
-#     string = strategies.text(),
-#     length = strategies.integers(),
-# )
-# def test_truncate_with_hypothesis(string, length):
-#     result = truncate(string, length)
-#     assert len(result) <= length
+def test_spy(mocker):
+    mult = Multiplier()
+
+    result = mult.quadruple(2)
+
+    assert result == 8
