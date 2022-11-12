@@ -1,18 +1,26 @@
 # fixtures are "shared setup functions"
 # use them to reduce duplication and clarify intent
 
+
+from dataclasses import dataclass
+
 import pytest
 
 
+@dataclass
 class User:
-    def __init__(self, email, is_admin):
-        self.email = email
-        self.is_admin = is_admin
+    email: str
+    is_admin: bool
 
 
-def test_user_is_josh():
-    assert user.email == "josh@example.com"
+@pytest.fixture
+def user():
+    return User(email="josh@example.com", is_admin=True)
 
 
-def test_josh_is_admin():
+def test_user_is_josh(user):
+    assert user.email == "gosh@example.com"
+
+
+def test_josh_is_admin(user):
     assert user.is_admin

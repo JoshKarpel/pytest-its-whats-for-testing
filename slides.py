@@ -1,3 +1,4 @@
+import functools
 import inspect
 import os
 import shlex
@@ -74,25 +75,48 @@ def what(triggers: Triggers):
     )
 
 
+@deck.slide(title="Assertions")
+def what(triggers: Triggers):
+    return Align.center(
+        Markdown(
+            dedent(
+                f"""\
+                ## Making Assertions
+                """
+            ),
+            justify="center",
+        ),
+        vertical="middle",
+    )
+
+
+@functools.lru_cache(maxsize=2**6)
+def run_pytest(path: Path, code: str) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        [
+            "pytest",
+            str(path),
+            "--verbose",
+            "--no-header",
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        env=os.environ
+        | {
+            "FORCE_COLOR": "true",
+            "COLUMNS": str(40),
+        },
+        cwd=EXAMPLES,
+    )
+
+
 def code_slide(path: Path, run: bool) -> Layout:
+    code = path.read_text().rstrip()
+    title = str(path.relative_to(EXAMPLES))
+
     if run:
-        result = subprocess.run(
-            [
-                "pytest",
-                str(path),
-                "--verbose",
-                "--no-header",
-            ],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            env=os.environ
-            | {
-                "FORCE_COLOR": "true",
-                "COLUMNS": str(40),
-            },
-            cwd=EXAMPLES,
-        )
+        result = run_pytest(path, code)
         style = Style(color="green" if result.returncode == 0 else "red")
         out = Text("\n", no_wrap=False).join(
             Text.from_ansi(line.rstrip(), no_wrap=True)
@@ -103,9 +127,6 @@ def code_slide(path: Path, run: bool) -> Layout:
         out = Text("")
 
     root = Layout()
-
-    code = path.read_text().rstrip()
-    title = str(path.relative_to(EXAMPLES))
 
     root.split_row(
         Layout(
@@ -132,7 +153,7 @@ def code_slide(path: Path, run: bool) -> Layout:
 
 
 @deck.slide(
-    title="Assertion Rewriting - Example 1",
+    title="Assertions - Example 1",
     edit_target=EXAMPLES / "assertions" / "ex_1.py",
 )
 def assertions_ex_1(triggers: Triggers):
@@ -143,7 +164,7 @@ def assertions_ex_1(triggers: Triggers):
 
 
 @deck.slide(
-    title="Assertion Rewriting - Example 2",
+    title="Assertions - Example 2",
     edit_target=EXAMPLES / "assertions" / "ex_2.py",
 )
 def assertions_ex_2(triggers: Triggers):
@@ -154,11 +175,22 @@ def assertions_ex_2(triggers: Triggers):
 
 
 @deck.slide(
-    title="Assertion Rewriting - Example 3",
+    title="Assertions - Example 3",
     edit_target=EXAMPLES / "assertions" / "ex_3.py",
 )
 def assertions_ex_3(triggers: Triggers):
     return code_slide(
         path=EXAMPLES / "assertions" / "ex_3.py",
+        run=triggers.triggered,
+    )
+
+
+@deck.slide(
+    title="Fixtures - Example 1",
+    edit_target=EXAMPLES / "fixtures" / "ex_1.py",
+)
+def fixtures_ex_1(triggers: Triggers):
+    return code_slide(
+        path=EXAMPLES / "fixtures" / "ex_1.py",
         run=triggers.triggered,
     )
