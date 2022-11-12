@@ -152,45 +152,20 @@ def code_slide(path: Path, run: bool) -> Layout:
     return root
 
 
-@deck.slide(
-    title="Assertions - Example 1",
-    edit_target=EXAMPLES / "assertions" / "ex_1.py",
-)
-def assertions_ex_1(triggers: Triggers):
-    return code_slide(
-        path=EXAMPLES / "assertions" / "ex_1.py",
-        run=triggers.triggered,
+def make_slide(ex_dir: Path, ex_file: Path):
+    @deck.slide(
+        title=f"{ex_dir.stem.title()} - Example {ex_file.stem.split('_')[-1]}",
+        edit_target=ex_file,
     )
+    def ex(triggers: Triggers):
+        return code_slide(
+            path=ex_file,
+            run=triggers.triggered,
+        )
 
 
-@deck.slide(
-    title="Assertions - Example 2",
-    edit_target=EXAMPLES / "assertions" / "ex_2.py",
-)
-def assertions_ex_2(triggers: Triggers):
-    return code_slide(
-        path=EXAMPLES / "assertions" / "ex_2.py",
-        run=triggers.triggered,
-    )
-
-
-@deck.slide(
-    title="Assertions - Example 3",
-    edit_target=EXAMPLES / "assertions" / "ex_3.py",
-)
-def assertions_ex_3(triggers: Triggers):
-    return code_slide(
-        path=EXAMPLES / "assertions" / "ex_3.py",
-        run=triggers.triggered,
-    )
-
-
-@deck.slide(
-    title="Fixtures - Example 1",
-    edit_target=EXAMPLES / "fixtures" / "ex_1.py",
-)
-def fixtures_ex_1(triggers: Triggers):
-    return code_slide(
-        path=EXAMPLES / "fixtures" / "ex_1.py",
-        run=triggers.triggered,
-    )
+for ex_dir in [EXAMPLES / "assertions", EXAMPLES / "fixtures"]:
+    for ex_file in sorted(
+        (path for path in ex_dir.iterdir() if path.stem.startswith("ex"))
+    ):
+        make_slide(ex_dir, ex_file)
