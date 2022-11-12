@@ -4,4 +4,4 @@ import pytest
 
 
 def test_dir(tmp_path):
-    assert (tmp_path / 'nope').exists()
+    assert (tmp_path / "nope").exists()

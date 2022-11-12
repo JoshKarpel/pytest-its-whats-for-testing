@@ -1,7 +1,8 @@
 # customized combinatorics via itertools
 
-import pytest
 import itertools
+
+import pytest
 
 LM = [(l, m) for l in range(3) for m in range(-l, l + 1)]
 

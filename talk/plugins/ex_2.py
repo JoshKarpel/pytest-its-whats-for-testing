@@ -1,8 +1,8 @@
 # pytest-timeout helps you do test-level timeouts
 
-import pytest
-
 import time
+
+import pytest
 
 
 @pytest.mark.timeout(5)

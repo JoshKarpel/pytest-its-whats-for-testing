@@ -2,5 +2,5 @@
 
 
 def test_foo():
-    with open('file.txt', mode = 'w') as f:
-        assert f.write('foo') > 0
+    with open("file.txt", mode="w") as f:
+        assert f.write("foo") > 0

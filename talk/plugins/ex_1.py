@@ -1,8 +1,8 @@
 # pytest-xdist parallelizes your tests
 
-import pytest
-
 import time
+
+import pytest
 
 
 @pytest.mark.parametrize("x", range(100))

@@ -1,12 +1,12 @@
 # pytest-mock wraps the stdlib unittest.mock module, plus some extras
 
-import pytest
-
 from pathlib import Path
+
+import pytest
 
 
 def test_mock(mocker):
-    assert Path('this-file-does-not-exist').exists()
+    assert Path("this-file-does-not-exist").exists()
 
 
 class Multiplier:
