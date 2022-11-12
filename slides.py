@@ -94,7 +94,7 @@ def code_slide(path: Path, run: bool) -> Layout:
             cwd=EXAMPLES,
         )
         style = Style(color="green" if result.returncode == 0 else "red")
-        out = Text("\n", no_wrap=True).join(
+        out = Text("\n", no_wrap=False).join(
             Text.from_ansi(line.rstrip(), no_wrap=True)
             for line in result.stdout.splitlines()
         )
@@ -104,7 +104,7 @@ def code_slide(path: Path, run: bool) -> Layout:
 
     root = Layout()
 
-    code = path.read_text()
+    code = path.read_text().rstrip()
     title = str(path.relative_to(EXAMPLES))
 
     root.split_row(
@@ -133,10 +133,32 @@ def code_slide(path: Path, run: bool) -> Layout:
 
 @deck.slide(
     title="Assertion Rewriting - Example 1",
-    edit_target=EXAMPLES / "assertion_rewriting" / "ex_1.py",
+    edit_target=EXAMPLES / "assertions" / "ex_1.py",
 )
 def assertions_ex_1(triggers: Triggers):
     return code_slide(
-        path=EXAMPLES / "assertion_rewriting" / "ex_1.py",
+        path=EXAMPLES / "assertions" / "ex_1.py",
+        run=triggers.triggered,
+    )
+
+
+@deck.slide(
+    title="Assertion Rewriting - Example 2",
+    edit_target=EXAMPLES / "assertions" / "ex_2.py",
+)
+def assertions_ex_2(triggers: Triggers):
+    return code_slide(
+        path=EXAMPLES / "assertions" / "ex_2.py",
+        run=triggers.triggered,
+    )
+
+
+@deck.slide(
+    title="Assertion Rewriting - Example 3",
+    edit_target=EXAMPLES / "assertions" / "ex_3.py",
+)
+def assertions_ex_3(triggers: Triggers):
+    return code_slide(
+        path=EXAMPLES / "assertions" / "ex_3.py",
         run=triggers.triggered,
     )
