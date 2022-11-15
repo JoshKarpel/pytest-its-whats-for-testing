@@ -1,25 +1,11 @@
-# pytest-mock wraps the stdlib unittest.mock module, plus some extras
+# pytest-xdist parallelizes your tests
 
-from pathlib import Path
+import time
 
 import pytest
 
 
-def test_mock(mocker):
-    assert Path("this-file-does-not-exist").exists()
-
-
-class Multiplier:
-    def double(self, x):
-        return 2 * x
-
-    def quadruple(self, x):
-        return self.double(self.double(x))
-
-
-def test_spy(mocker):
-    mult = Multiplier()
-
-    result = mult.quadruple(2)
-
-    assert result == 8
+@pytest.mark.parametrize("x", range(100))
+def test_foo(x):
+    time.sleep(0.1)
+    assert True

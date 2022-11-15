@@ -3,15 +3,26 @@
 import pytest
 
 
-@pytest.fixture(params=["sqlite", "postgres", "mongo"])
+@pytest.fixture(
+    params=[
+        "sqlite",
+        "postgres",
+        "mongo",
+    ]
+)
 def database(request):
     return request.param
 
 
-@pytest.fixture()
+@pytest.fixture(
+    params=[
+        "josh",
+        "ed",
+    ]
+)
 def username():
     return "josh"
 
 
-def test_database_and_username(database, username):
+def test_combinations(database, username):
     pass

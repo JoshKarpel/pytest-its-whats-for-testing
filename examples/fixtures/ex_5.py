@@ -1,27 +1,28 @@
 # fixtures have scope
-# we can see the scoping by running pytest --setup-show/plan
+# we can see the scoping by running
+#  $ pytest --setup-show/plan
 
 import pytest
 
 
 @pytest.fixture(scope="session")
-def session_fixture():
+def session():
     pass
 
 
 @pytest.fixture(scope="module")
-def module_fixture():
+def module(session):
     pass
 
 
 @pytest.fixture(scope="function")
-def function_fixture():
+def function(session, module):
     pass
 
 
-def test_a(session_fixture, module_fixture, function_fixture):
+def test_a(session, module, function):
     pass
 
 
-def test_b(session_fixture, module_fixture, function_fixture):
+def test_b(session, module, function):
     pass
