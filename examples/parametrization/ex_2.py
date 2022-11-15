@@ -3,7 +3,13 @@
 import pytest
 
 
-@pytest.fixture(params=["sqlite", "postgres", "mongo"])
+@pytest.fixture(
+    params=[
+        "sqlite",
+        "postgres",
+        "mongo",
+    ]
+)
 def database(request):
     return request.param
 

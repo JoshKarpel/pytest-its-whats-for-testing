@@ -24,5 +24,5 @@ def username():
     return "josh"
 
 
-def test_combinations(database, username):
+def test_something(database, username):
     pass

@@ -207,7 +207,7 @@ deck.add_slides(
 
 
 @deck.slide(title="Fixtures")
-def assertions():
+def fixtures():
     return Padding(
         Align.center(
             Markdown(
@@ -245,12 +245,40 @@ deck.add_slides(
 
 
 @deck.slide(title="Parametrization")
-def assertions():
+def parametrization():
     return Align.center(
         Markdown(
             dedent(
                 f"""\
                 ## Parametrization
+
+                *Parametrization* is a mechanism for reusing *test logic* with different *test data*.
+
+                Parametrization serves much the same role as extracting a function does in your business logic.
+
+                By separating instructions from data, we get increased flexibility and expressiveness.
+                """
+            ),
+            justify="center",
+        ),
+        vertical="middle",
+    )
+
+
+@deck.slide(title="Er, isn't that spelled wrong?")
+def parametrization_spelling():
+    return Align.center(
+        Text.from_markup(
+            dedent(
+                f"""\
+                Yes, it's spelled [red underline]parametrization[/red underline],
+                              not [cyan underline]paramet[bold]e[/bold]rization[/cyan underline].
+
+                It's the British spelling.
+
+                Yes, people have asked.
+
+                No, they have not added an alias.
                 """
             ),
             justify="center",
@@ -304,3 +332,29 @@ deck.add_slides(
         extra_args=lambda triggers: () if len(triggers) < 3 else ("-n", "4"),
     ),
 )
+
+
+@deck.slide(title="What Next?")
+def what_next():
+    return Align.center(
+        Markdown(
+            dedent(
+                f"""\
+                ## What Next?
+
+                The `pytest` docs are excellent and cover both the API
+                and a wide variety of questions about potential use cases.
+
+                If you're using a framework, check whether there's a plugin for it
+                (e.g., `pytest-flask`, `pytest-django`, etc.).
+
+                The `hypothesis` library integrates with `pytest` to do *property testing*
+                (think paramtrization, but guided by the computer).
+
+                `pytest` can run `unittest` tests, so it possible to migrate gradually.
+                """
+            ),
+            justify="center",
+        ),
+        vertical="middle",
+    )
