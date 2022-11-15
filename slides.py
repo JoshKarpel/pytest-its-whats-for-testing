@@ -26,6 +26,10 @@ deck = Deck(name=f"pytest")
 THIS_DIR = Path(__file__).resolve().parent
 IMAGES = THIS_DIR / "images"
 EXAMPLES = THIS_DIR / "examples"
+EXAMPLES_ASSERTIONS = EXAMPLES / "assertions"
+EXAMPLES_FIXTURES = EXAMPLES / "fixtures"
+EXAMPLES_PARAMETRIZATION = EXAMPLES / "parametrization"
+EXAMPLES_PLUGINS = EXAMPLES / "plugins"
 
 
 @deck.slide(title="It's What's For Testing")
@@ -75,29 +79,17 @@ def what(triggers: Triggers):
     )
 
 
-@deck.slide(title="Assertions")
-def what(triggers: Triggers):
-    return Align.center(
-        Markdown(
-            dedent(
-                f"""\
-                ## Making Assertions
-                """
-            ),
-            justify="center",
-        ),
-        vertical="middle",
-    )
-
-
 @functools.lru_cache(maxsize=2**6)
-def run_pytest(path: Path, code: str) -> subprocess.CompletedProcess:
+def run_pytest(
+    path: Path, code: str, extra_args: tuple[str]
+) -> subprocess.CompletedProcess:
     return subprocess.run(
         [
             "pytest",
             str(path),
             "--verbose",
             "--no-header",
+            *extra_args,
         ],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -111,12 +103,13 @@ def run_pytest(path: Path, code: str) -> subprocess.CompletedProcess:
     )
 
 
-def code_slide(path: Path, run: bool) -> Layout:
-    code = path.read_text().rstrip()
-    title = str(path.relative_to(EXAMPLES))
+def code_slide(paths: list[Path], run: bool, extra_args: tuple[str]) -> Layout:
+    main_example = paths[0]
+    code = main_example.read_text().rstrip()
+    title = str(main_example.relative_to(EXAMPLES))
 
     if run:
-        result = run_pytest(path, code)
+        result = run_pytest(main_example, code, extra_args)
         style = Style(color="green" if result.returncode == 0 else "red")
         out = Text("\n", no_wrap=False).join(
             Text.from_ansi(line.rstrip(), no_wrap=True)
@@ -128,19 +121,29 @@ def code_slide(path: Path, run: bool) -> Layout:
 
     root = Layout()
 
-    root.split_row(
-        Layout(
+    example_panels = []
+    max_width = 0
+    for path in paths:
+        ex_code = path.read_text().rstrip()
+        ex_title = path.relative_to(EXAMPLES)
+
+        example_panels.append(
             Panel(
                 Syntax(
-                    code,
+                    ex_code,
                     lexer="python",
                     line_numbers=False,
                 ),
                 border_style=Style(color="magenta"),
-                title=f"$ cat {title}",
+                title=f"$ cat {ex_title}",
             ),
-            size=max(len(line) for line in code.splitlines()) + 4,
-        ),
+        )
+        max_width = max(max(len(line) for line in ex_code.splitlines()) + 4, max_width)
+
+    files_layout = Layout(Group(*example_panels), size=max_width)
+
+    root.split_row(
+        files_layout,
         Layout(
             Panel(
                 out,
@@ -152,20 +155,62 @@ def code_slide(path: Path, run: bool) -> Layout:
     return root
 
 
-def make_slide(ex_dir: Path, ex_file: Path):
-    @deck.slide(
-        title=f"{ex_dir.stem.title()} - Example {ex_file.stem.split('_')[-1]}",
-        edit_target=ex_file,
+def make_example_slide(
+    ex_files: list[Path], extra_args: tuple[str] | None = None
+) -> Slide:
+    return Slide(
+        title=f"{ex_files[0].parent.stem.title()} - Example {ex_files[0].stem.split('_')[-1]}",
+        content=lambda triggers: code_slide(
+            paths=ex_files, run=triggers.triggered, extra_args=extra_args or ()
+        ),
+        edit_target=ex_files[0],
     )
-    def ex(triggers: Triggers):
-        return code_slide(
-            path=ex_file,
-            run=triggers.triggered,
-        )
 
 
-for ex_dir in [EXAMPLES / "assertions", EXAMPLES / "fixtures"]:
-    for ex_file in sorted(
-        (path for path in ex_dir.iterdir() if path.stem.startswith("ex"))
-    ):
-        make_slide(ex_dir, ex_file)
+@deck.slide(title="Assertions")
+def assertions():
+    return Align.center(
+        Markdown(
+            dedent(
+                f"""\
+                ## Making Assertions
+                """
+            ),
+            justify="center",
+        ),
+        vertical="middle",
+    )
+
+
+deck.add_slides(
+    make_example_slide([EXAMPLES_ASSERTIONS / "ex_1.py"]),
+    make_example_slide([EXAMPLES_ASSERTIONS / "ex_2.py"]),
+    make_example_slide([EXAMPLES_ASSERTIONS / "ex_3.py"]),
+)
+
+
+@deck.slide(title="Fixtures")
+def assertions():
+    return Align.center(
+        Markdown(
+            dedent(
+                f"""\
+                ## Using Fixtures
+                """
+            ),
+            justify="center",
+        ),
+        vertical="middle",
+    )
+
+
+deck.add_slides(
+    make_example_slide([EXAMPLES_FIXTURES / "ex_1.py"]),
+    make_example_slide([EXAMPLES_FIXTURES / "ex_2.py"]),
+    make_example_slide(
+        [EXAMPLES_FIXTURES / "ex_3.py", EXAMPLES_FIXTURES / "conftest.py"]
+    ),
+    make_example_slide([EXAMPLES_FIXTURES / "ex_4.py"]),
+    make_example_slide([EXAMPLES_FIXTURES / "ex_5.py"], extra_args=("--setup-plan",)),
+    make_example_slide([EXAMPLES_FIXTURES / "ex_6.py"]),
+)
