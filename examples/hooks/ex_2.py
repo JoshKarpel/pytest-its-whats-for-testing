@@ -1,19 +1,14 @@
-# combine multiple hook functions to get information where it needs to go
+# hook functions can be combined to do weird things
 # example: parametrize based on command-line arguments
 
-import os
 
-import pytest
-
-
-@pytest.fixture
-def db(db_type):
-    if db_type == "postgresql":
-        return object()
-    elif db_type == "sqlite3":
-        return object()
-    # ...
+def pytest_generate_tests(metafunc):
+    if "db" in metafunc.fixturenames:
+        metafunc.parametrize(
+            argnames="db",
+            argvalues=metafunc.config.getoption("db"),
+        )
 
 
-def test_foo(db):
-    assert db
+def test_db_type(db):
+    assert db == "sqlite3"

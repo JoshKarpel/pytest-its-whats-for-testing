@@ -32,6 +32,7 @@ EXAMPLES = THIS_DIR / "examples"
 EXAMPLES_ASSERTIONS = EXAMPLES / "assertions"
 EXAMPLES_FIXTURES = EXAMPLES / "fixtures"
 EXAMPLES_PARAMETRIZATION = EXAMPLES / "parametrization"
+EXAMPLES_HOOKS = EXAMPLES / "hooks"
 EXAMPLES_PLUGINS = EXAMPLES / "plugins"
 
 
@@ -107,7 +108,7 @@ def code_slide(
         Layout(
             Panel(
                 out,
-                title=f"$ pytest {title} {shlex.join(ea)}",
+                title=f"$ pytest {title} {shlex.join(a for a in ea if a != '--verbose')}",
                 border_style=style,
             )
         ),
@@ -297,8 +298,39 @@ deck.add_slides(
 )
 
 
+@deck.slide(title="Hooks")
+def hooks(triggers: Triggers):
+    return Align.center(
+        Markdown(
+            dedent(
+                f"""\
+                ## Hooks
+
+                `pytest` provides a wide variety of *hooks* that can change or add to its default behavior.
+                """
+            ),
+            justify="center",
+        ),
+        vertical="middle",
+    )
+
+
+deck.add_slides(
+    make_example_slide([EXAMPLES_HOOKS / "ex_1.py"]),
+    make_example_slide([EXAMPLES_HOOKS / "ex_2.py", EXAMPLES_HOOKS / "conftest.py"]),
+    make_example_slide(
+        [EXAMPLES_HOOKS / "ex_2.py", EXAMPLES_HOOKS / "conftest.py"],
+        extra_args=("--verbose", "--db", "postgresql"),
+    ),
+    make_example_slide(
+        [EXAMPLES_HOOKS / "ex_2.py", EXAMPLES_HOOKS / "conftest.py"],
+        extra_args=("--verbose", "--db", "sqlite", "postgresql"),
+    ),
+)
+
+
 @deck.slide(title="Plugins")
-def assertions(triggers: Triggers):
+def plugins(triggers: Triggers):
     if triggers.triggered and triggers.now == triggers[-1]:
         wave = WaveObject.from_wave_file(str(SOUNDS / "dun_dun.wav"))
         wave.play().wait_done()
@@ -315,7 +347,7 @@ def assertions(triggers: Triggers):
 
                 *Fixture providers*, which provide new globally-available fixtures.
 
-                *Hook implementers*, which use `pytest`'s hook system to change its internal behavior.
+                *Hook implementers*, which use the hook system to change behavior.
                 """
             ),
             justify="center",
@@ -327,10 +359,8 @@ def assertions(triggers: Triggers):
 deck.add_slides(
     make_example_slide([EXAMPLES_PLUGINS / "ex_1.py"]),
     make_example_slide([EXAMPLES_PLUGINS / "ex_2.py"]),
-    make_example_slide(
-        [EXAMPLES_PLUGINS / "ex_3.py"],
-        extra_args=lambda triggers: () if len(triggers) < 3 else ("-n", "4"),
-    ),
+    make_example_slide([EXAMPLES_PLUGINS / "ex_3.py"], extra_args=()),
+    make_example_slide([EXAMPLES_PLUGINS / "ex_3.py"], extra_args=("-n", "4")),
 )
 
 
@@ -346,10 +376,10 @@ def what_next():
                 and a wide variety of questions about potential use cases.
 
                 If you're using a framework, check whether there's a plugin for it
-                (e.g., `pytest-flask`, `pytest-django`, etc.).
+                (`pytest-flask`, `pytest-django`, etc.).
 
                 The `hypothesis` library integrates with `pytest` to do *property testing*
-                (think paramtrization, but guided by the computer).
+                (think parametrization, but guided by the computer).
 
                 `pytest` can run `unittest` tests, so it possible to migrate gradually.
                 """
