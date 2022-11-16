@@ -62,15 +62,16 @@ def run_pytest(
 def code_slide(
     paths: list[Path],
     triggers: Triggers,
-    extra_args: Callable[[Triggers], tuple[str, ...]],
+    extra_args: tuple[str, ...],
 ) -> Layout:
     main_example = paths[0]
     code = main_example.read_text().rstrip()
     title = str(main_example.relative_to(EXAMPLES))
-    ea = extra_args(triggers)
 
     if triggers.triggered:
-        result = run_pytest(main_example, extra_args=ea, code=code, start=triggers[0])
+        result = run_pytest(
+            main_example, extra_args=extra_args, code=code, start=triggers[0]
+        )
         style = Style(color="green" if result.returncode == 0 else "red")
         out = Text("\n", no_wrap=False).join(
             Text.from_ansi(line.rstrip(), no_wrap=True)
@@ -108,7 +109,7 @@ def code_slide(
         Layout(
             Panel(
                 out,
-                title=f"$ pytest {title} {shlex.join(a for a in ea if a != '--verbose')}",
+                title=f"$ pytest {title} {shlex.join(a for a in extra_args if a != '--verbose')}",
                 border_style=style,
             )
         ),
@@ -118,17 +119,14 @@ def code_slide(
 
 def make_example_slide(
     ex_files: list[Path],
-    extra_args: tuple[str, ...]
-    | Callable[[Triggers], tuple[str, ...]] = ("--verbose",),
+    extra_args: tuple[str, ...] = ("--verbose",),
 ) -> Slide:
     return Slide(
         title=f"{ex_files[0].parent.stem.title()} - Example {ex_files[0].stem.split('_')[-1]}",
         content=lambda triggers: code_slide(
             paths=ex_files,
             triggers=triggers,
-            extra_args=(lambda triggers: extra_args)
-            if not callable(extra_args)
-            else extra_args,
+            extra_args=extra_args,
         ),
         edit_target=ex_files[0],
     )
