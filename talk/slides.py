@@ -305,6 +305,8 @@ def hooks(triggers: Triggers):
                 ## Hooks
 
                 `pytest` provides a wide variety of *hooks* that can change or add to its default behavior.
+
+                Use these with care! `pytest` is complex and indirect enough as-is!
                 """
             ),
             justify="center",
