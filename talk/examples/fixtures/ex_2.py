@@ -6,12 +6,14 @@ import pytest
 
 @pytest.fixture
 def file():
-    with open("foo/file.txt", mode="w") as file:
-        print(f"fixture created {file}")
+    print(f"before with block")
+    with open(__file__, mode="r") as file:
+        print(f"start with block")
         yield file
-        print(f"back in the fixture with {file}")
+        print(f"back in the with block")
     print("after with block")
 
 
 def test_the_file(file):
-    assert file.write("hello") > 0
+    print("in the test")
+    assert False
