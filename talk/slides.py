@@ -293,6 +293,7 @@ deck.add_slides(
     make_example_slide(
         [EXAMPLES_PARAMETRIZATION / "ex_4.py"], extra_args=("--collect-only",)
     ),
+    make_example_slide([EXAMPLES_PARAMETRIZATION / "ex_5.py"]),
 )
 
 
