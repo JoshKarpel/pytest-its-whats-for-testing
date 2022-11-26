@@ -4,8 +4,10 @@ import shlex
 import subprocess
 from pathlib import Path
 from textwrap import dedent
+from time import sleep
 from typing import Callable
 
+from click import edit
 from rich.align import Align
 from rich.console import Group
 from rich.layout import Layout
@@ -128,8 +130,16 @@ def make_example_slide(
             triggers=triggers,
             extra_args=extra_args,
         ),
-        edit_target=ex_files[0],
+        bindings={"e": edit_file(ex_files[0])},
     )
+
+
+def edit_file(path):
+    def _(suspend):
+        with suspend():
+            edit(filename=str(path))
+
+    return _
 
 
 @deck.slide(title="It's What's For Testing")
