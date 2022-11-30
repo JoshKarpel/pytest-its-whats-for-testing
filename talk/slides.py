@@ -4,8 +4,6 @@ import shlex
 import subprocess
 from pathlib import Path
 from textwrap import dedent
-from time import sleep
-from typing import Callable
 
 from click import edit
 from rich.align import Align
@@ -16,6 +14,7 @@ from rich.padding import Padding
 from rich.panel import Panel
 from rich.style import Style
 from rich.syntax import Syntax
+from rich.table import Table
 from rich.text import Text
 from simpleaudio import WaveObject
 from spiel import Slide, Triggers
@@ -173,7 +172,7 @@ def what():
 
 
 @deck.slide(title="Why use `pytest`?")
-def what(triggers: Triggers):
+def why(triggers: Triggers):
     return Align.center(
         Markdown(
             dedent(
@@ -184,6 +183,41 @@ def what(triggers: Triggers):
                 """
             ),
             justify="center",
+        ),
+        vertical="middle",
+    )
+
+
+@deck.slide(title="How does `pytest` make testing fun?")
+def why(triggers: Triggers):
+    table = Table.grid(expand=False, padding=1, collapse_padding=True)
+
+    reasons = [
+        "- Write and debug complex assertions with no fuss",
+        "- Flexibly and efficiently reuse setup/teardown code",
+        "- Generate new test cases programmatically",
+        "- Customize internal behavior",
+        "- Reuse code via plugins",
+    ]
+    table.add_column(justify="left", width=len(max(reasons, key=len)))
+
+    for trigger_to_display_on, reason in enumerate(reasons, start=2):
+        table.add_row(reason if len(triggers) >= trigger_to_display_on else "")
+
+    return Align.center(
+        Group(
+            Padding(
+                Markdown(
+                    dedent(
+                        f"""\
+                        ## How?
+                        """
+                    ),
+                    justify="center",
+                ),
+                pad=(0, 0, 2, 0),
+            ),
+            Align.center(table),
         ),
         vertical="middle",
     )
@@ -209,9 +243,9 @@ def assertions():
 
 
 deck.add_slides(
-    make_example_slide([EXAMPLES_ASSERTIONS / "ex_3.py"]),
-    make_example_slide([EXAMPLES_ASSERTIONS / "ex_2.py"]),
     make_example_slide([EXAMPLES_ASSERTIONS / "ex_1.py"]),
+    make_example_slide([EXAMPLES_ASSERTIONS / "ex_2.py"]),
+    make_example_slide([EXAMPLES_ASSERTIONS / "ex_3.py"]),
 )
 
 
@@ -358,7 +392,7 @@ def plugins(triggers: Triggers):
 
                 *Fixture providers*, which provide new globally-available fixtures.
 
-                *Hook implementers*, which use the hook system to change behavior.
+                *Hook implementers*, which use the hook system to change `pytest`'s behavior.
                 """
             ),
             justify="center",

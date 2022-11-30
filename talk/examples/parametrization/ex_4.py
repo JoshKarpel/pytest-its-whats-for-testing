@@ -5,11 +5,7 @@ from itertools import combinations_with_replacement
 import pytest
 
 TYPES = combinations_with_replacement(
-    [
-        "radial",
-        "grad",
-        "cross",
-    ],
+    ["radial", "grad", "cross"],
     r=2,
 )
 LM = [(l, m) for l in range(3) for m in range(-l, l + 1)]

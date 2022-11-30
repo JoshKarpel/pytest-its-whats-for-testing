@@ -61,7 +61,7 @@ test = ["flake8 (==3.7.8)", "hypothesis (==3.55.3)"]
 
 [[package]]
 name = "exceptiongroup"
-version = "1.0.1"
+version = "1.0.4"
 description = "Backport of PEP 654 (exception groups)"
 category = "main"
 optional = false
@@ -273,7 +273,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "spiel"
-version = "0.4.0"
+version = "0.4.1"
 description = "A framework for building and presenting richly-styled presentations in your terminal using Python."
 category = "main"
 optional = false
@@ -282,13 +282,13 @@ python-versions = ">=3.10,<4"
 [package.dependencies]
 Pillow = ">=8"
 rich = ">=12"
-textual = ">=0.5"
+textual = "0.4.0"
 typer = ">=0.6"
 watchfiles = ">=0.18"
 
 [[package]]
 name = "textual"
-version = "0.5.0"
+version = "0.4.0"
 description = "Modern Text User Interface framework"
 category = "main"
 optional = false
@@ -353,7 +353,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b81e8aa9d11d6427c2bc8978b6578a66ea55fc323a06143a5e4d71ddd0a8db0a"
+content-hash = "0fc5a4a2dc85f283ebe9ed37d42f4088cce5cee4125b32b54a7495058470f2be"
 
 [metadata.files]
 anyio = [
@@ -377,8 +377,8 @@ commonmark = [
     {file = "commonmark-0.9.1.tar.gz", hash = "sha256:452f9dc859be7f06631ddcb328b6919c67984aca654e5fefb3914d54691aed60"},
 ]
 exceptiongroup = [
-    {file = "exceptiongroup-1.0.1-py3-none-any.whl", hash = "sha256:4d6c0aa6dd825810941c792f53d7b8d71da26f5e5f84f20f9508e8f2d33b140a"},
-    {file = "exceptiongroup-1.0.1.tar.gz", hash = "sha256:73866f7f842ede6cb1daa42c4af078e2035e5f7607f0e2c762cc51bb31bbe7b2"},
+    {file = "exceptiongroup-1.0.4-py3-none-any.whl", hash = "sha256:542adf9dea4055530d6e1279602fa5cb11dab2395fa650b8674eaec35fc4a828"},
+    {file = "exceptiongroup-1.0.4.tar.gz", hash = "sha256:bd14967b79cd9bdb54d97323216f8fdf533e278df937aa2a90089e7d6e06e5ec"},
 ]
 execnet = [
     {file = "execnet-1.9.0-py2.py3-none-any.whl", hash = "sha256:a295f7cc774947aac58dde7fdc85f4aa00c42adf5d8f5468fc630c1acf30a142"},
@@ -513,12 +513,12 @@ sniffio = [
     {file = "sniffio-1.3.0.tar.gz", hash = "sha256:e60305c5e5d314f5389259b7f22aaa33d8f7dee49763119234af3755c55b9101"},
 ]
 spiel = [
-    {file = "spiel-0.4.0-py3-none-any.whl", hash = "sha256:ec79062db8e19e7c4a6d60c478f769a327ae7d2fe68d16044efc9f4bedc031ae"},
-    {file = "spiel-0.4.0.tar.gz", hash = "sha256:977239b721a6c0826c11aaba9966777697adf4753f4c5ace5c143d495828662b"},
+    {file = "spiel-0.4.1-py3-none-any.whl", hash = "sha256:335d0e2b643e97dc02f3a3a92fa0d4d8ea6ebd130946a2ac2d563544d1573988"},
+    {file = "spiel-0.4.1.tar.gz", hash = "sha256:7e42946e762b336d576a19ff8ed154d7fc8d806239eb2cdff343078c33f159fe"},
 ]
 textual = [
-    {file = "textual-0.5.0-py3-none-any.whl", hash = "sha256:d1925f9f019858beaabda8a87cb87fb57cbbf321e948fc3b28d7085e83c8f5ab"},
-    {file = "textual-0.5.0.tar.gz", hash = "sha256:516bf4db05830e70f9806828610a1a00de08068d984d329dbecc8dbef5d71ab7"},
+    {file = "textual-0.4.0-py3-none-any.whl", hash = "sha256:10aac2d244ef4a5aef89a38f9088382a5ce6914cec953d40a9527d729c300f53"},
+    {file = "textual-0.4.0.tar.gz", hash = "sha256:53c836c978a8d8460efc4f097fc4748a3d68060b4c77d8fa80fdf6cca9a8198c"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
