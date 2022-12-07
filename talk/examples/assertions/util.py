@@ -1,6 +1,6 @@
-import time
-import struct
 import marshal
+import struct
+import time
 
 
 def code_from_pyc(file):

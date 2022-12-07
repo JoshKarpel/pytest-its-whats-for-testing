@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "pytest-its-whats-for-testing"
+version = "0.1.0"
+description = ""
+authors = ["Josh Karpel <josh.karpel@gmail.com>"]
+readme = "README.md"
+packages = [{include = "pytest_its_whats_for_testing"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "^7.2.0"
+pytest-mock = "^3.10.0"
+pytest-timeout = "^2.1.0"
+pytest-xdist = "^3.0.2"
+simpleaudio = "^1.0.4"
+spiel = ">=0.4.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

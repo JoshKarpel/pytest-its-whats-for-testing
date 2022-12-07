@@ -4,7 +4,12 @@ import pytest
 
 
 def is_valid_email(email):
-    return all(("@" in email, email.endswith(".com") or email.endswith(".edu")))
+    return all(
+        (
+            "@" in email,
+            email.endswith(".com") or email.endswith(".edu"),
+        )
+    )
 
 
 def test_validate_email_1():
