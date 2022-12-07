@@ -1,7 +1,5 @@
 # parametrization reduces duplication
 
-import pytest
-
 
 def is_valid_email(email):
     return all(
@@ -12,21 +10,21 @@ def is_valid_email(email):
     )
 
 
-def test_validate_email_1():
+def test_is_valid_email_1():
     email = "josh@example.com"
     assert is_valid_email(email)
 
 
-def test_validate_email_2():
+def test_is_valid_email_2():
     email = "josh@example.edu"
     assert is_valid_email(email)
 
 
-def test_validate_email_3():
+def test_is_valid_email_3():
     email = "josh@example.net"
     assert not is_valid_email(email)
 
 
-def test_validate_email_4():
+def test_is_valid_email_4():
     email = "josh.example.net"
     assert not is_valid_email(email)

@@ -13,7 +13,8 @@ pytest-mock = "^3.10.0"
 pytest-timeout = "^2.1.0"
 pytest-xdist = "^3.0.2"
 simpleaudio = "^1.0.4"
-spiel = ">=0.4.1"
+spiel = "==0.4.1"
+hypothesis = "^6.60.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,26 +1,23 @@
 # pytest-mock wraps the stdlib unittest.mock module,
 # plus some extras!
 
-from pathlib import Path
 
-import pytest
+class C:
+    def m(self):
+        return False
 
 
 def test_mock(mocker):
-    assert Path("this-file-does-not-exist").exists()
+    c = C()
 
+    assert not c.m()
 
-class Multiplier:
-    def double(self, x):
-        return 2 * x
+    mocked_method = mocker.patch.object(
+        c,
+        "m",
+        mocker.Mock(return_value=True),
+    )
 
-    def quadruple(self, x):
-        return self.double(self.double(x))
+    assert c.m()
 
-
-def test_spy(mocker):
-    mult = Multiplier()
-
-    result = mult.quadruple(2)
-
-    assert result == 8
+    assert mocked_method.call_count == 1

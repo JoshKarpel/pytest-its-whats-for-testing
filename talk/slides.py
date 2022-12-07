@@ -331,7 +331,8 @@ def parametrization_spelling():
 
 
 deck.add_slides(
-    make_example_slide([EXAMPLES_PARAMETRIZATION / "ex_1.py"]),
+    make_example_slide([EXAMPLES_PARAMETRIZATION / "ex_1a.py"]),
+    make_example_slide([EXAMPLES_PARAMETRIZATION / "ex_1b.py"]),
     make_example_slide([EXAMPLES_PARAMETRIZATION / "ex_2.py"]),
     make_example_slide([EXAMPLES_PARAMETRIZATION / "ex_3.py"]),
     make_example_slide(
@@ -406,6 +407,7 @@ deck.add_slides(
     make_example_slide([EXAMPLES_PLUGINS / "ex_2.py"]),
     make_example_slide([EXAMPLES_PLUGINS / "ex_3.py"], extra_args=()),
     make_example_slide([EXAMPLES_PLUGINS / "ex_3.py"], extra_args=("-n", "4")),
+    make_example_slide([EXAMPLES_PLUGINS / "ex_4.py"]),
 )
 
 
@@ -422,9 +424,6 @@ def what_next():
 
                 If you're using a framework, check whether there's a plugin for it
                 (`pytest-flask`, `pytest-django`, etc.).
-
-                The `hypothesis` library integrates with `pytest` to do *property testing*
-                (think parametrization, but guided by the computer).
 
                 `pytest` can run `unittest` tests, so it possible to migrate gradually.
                 """
