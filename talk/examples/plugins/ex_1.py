@@ -1,5 +1,4 @@
-# pytest-mock wraps the stdlib unittest.mock module,
-# plus some extras!
+# pytest-mock wraps the stdlib unittest.mock module
 
 
 class C:

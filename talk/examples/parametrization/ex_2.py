@@ -15,5 +15,4 @@ def database(request):
 
 
 def test_database(database):
-    print(database)
     assert False

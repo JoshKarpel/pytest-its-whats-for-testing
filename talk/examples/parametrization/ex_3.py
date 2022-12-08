@@ -20,8 +20,8 @@ def database(request):
         "ed",
     ]
 )
-def username():
-    return "josh"
+def username(request):
+    return request.param
 
 
 def test_something(database, username):
