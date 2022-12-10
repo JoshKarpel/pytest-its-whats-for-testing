@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Josh Karpel <josh.karpel@gmail.com>"]
 readme = "README.md"
-packages = [{include = "pytest_its_whats_for_testing"}]
+include = ["images/*", "sounds/*"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -13,7 +13,7 @@ pytest-mock = "^3.10.0"
 pytest-timeout = "^2.1.0"
 pytest-xdist = "^3.0.2"
 simpleaudio = "^1.0.4"
-spiel = "==0.4.1"
+spiel = "==0.4.2"
 hypothesis = "^6.60.0"
 
 [build-system]

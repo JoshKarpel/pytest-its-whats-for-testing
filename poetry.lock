@@ -152,14 +152,11 @@ python-versions = "*"
 
 [[package]]
 name = "packaging"
-version = "21.3"
+version = "22.0"
 description = "Core utilities for Python packages"
 category = "main"
 optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-pyparsing = ">=2.0.2,<3.0.5 || >3.0.5"
+python-versions = ">=3.7"
 
 [[package]]
 name = "pillow"
@@ -195,17 +192,6 @@ python-versions = ">=3.6"
 
 [package.extras]
 plugins = ["importlib-metadata"]
-
-[[package]]
-name = "pyparsing"
-version = "3.0.9"
-description = "pyparsing module - Classes and methods to define and execute parsing grammars"
-category = "main"
-optional = false
-python-versions = ">=3.6.8"
-
-[package.extras]
-diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
 name = "pytest"
@@ -310,7 +296,7 @@ python-versions = "*"
 
 [[package]]
 name = "spiel"
-version = "0.4.1"
+version = "0.4.2"
 description = "A framework for building and presenting richly-styled presentations in your terminal using Python."
 category = "main"
 optional = false
@@ -390,7 +376,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "532100ce07fe3064d5ec750770f59736d535688d4965fa69376d75fd9905c310"
+content-hash = "9183412f4e3ab49bb2c68d4b4be62b924a54b9a5d6a48de51748c7b32f0b5c38"
 
 [metadata.files]
 anyio = [
@@ -442,8 +428,8 @@ nanoid = [
     {file = "nanoid-2.0.0.tar.gz", hash = "sha256:5a80cad5e9c6e9ae3a41fa2fb34ae189f7cb420b2a5d8f82bd9d23466e4efa68"},
 ]
 packaging = [
-    {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
-    {file = "packaging-21.3.tar.gz", hash = "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb"},
+    {file = "packaging-22.0-py3-none-any.whl", hash = "sha256:957e2148ba0e1a3b282772e791ef1d8083648bc131c8ab0c1feba110ce1146c3"},
+    {file = "packaging-22.0.tar.gz", hash = "sha256:2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3"},
 ]
 pillow = [
     {file = "Pillow-9.3.0-1-cp37-cp37m-win32.whl", hash = "sha256:e6ea6b856a74d560d9326c0f5895ef8050126acfdc7ca08ad703eb0081e82b74"},
@@ -516,10 +502,6 @@ pygments = [
     {file = "Pygments-2.13.0-py3-none-any.whl", hash = "sha256:f643f331ab57ba3c9d89212ee4a2dabc6e94f117cf4eefde99a0574720d14c42"},
     {file = "Pygments-2.13.0.tar.gz", hash = "sha256:56a8508ae95f98e2b9bdf93a6be5ae3f7d8af858b43e02c5a2ff083726be40c1"},
 ]
-pyparsing = [
-    {file = "pyparsing-3.0.9-py3-none-any.whl", hash = "sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc"},
-    {file = "pyparsing-3.0.9.tar.gz", hash = "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb"},
-]
 pytest = [
     {file = "pytest-7.2.0-py3-none-any.whl", hash = "sha256:892f933d339f068883b6fd5a459f03d85bfcb355e4981e146d2c7616c21fef71"},
     {file = "pytest-7.2.0.tar.gz", hash = "sha256:c4014eb40e10f11f355ad4e3c2fb2c6c6d1919c73f3b5a433de4708202cade59"},
@@ -558,8 +540,8 @@ sortedcontainers = [
     {file = "sortedcontainers-2.4.0.tar.gz", hash = "sha256:25caa5a06cc30b6b83d11423433f65d1f9d76c4c6a0c90e3379eaa43b9bfdb88"},
 ]
 spiel = [
-    {file = "spiel-0.4.1-py3-none-any.whl", hash = "sha256:335d0e2b643e97dc02f3a3a92fa0d4d8ea6ebd130946a2ac2d563544d1573988"},
-    {file = "spiel-0.4.1.tar.gz", hash = "sha256:7e42946e762b336d576a19ff8ed154d7fc8d806239eb2cdff343078c33f159fe"},
+    {file = "spiel-0.4.2-py3-none-any.whl", hash = "sha256:76d4e63023ae636424d4fa7e5d5816104ef36ce5aea94e2cc5ea50278db8ad47"},
+    {file = "spiel-0.4.2.tar.gz", hash = "sha256:45f0af2f046d20284a71e48e24eba973d2de80b6bd115db3d8c239b941bef101"},
 ]
 textual = [
     {file = "textual-0.4.0-py3-none-any.whl", hash = "sha256:10aac2d244ef4a5aef89a38f9088382a5ce6914cec953d40a9527d729c300f53"},

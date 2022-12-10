@@ -17,7 +17,7 @@ from rich.syntax import Syntax
 from rich.table import Table
 from rich.text import Text
 from simpleaudio import WaveObject
-from spiel import Slide, Triggers
+from spiel import Slide, Triggers, present
 from spiel.deck import Deck
 from spiel.renderables.image import Image
 
@@ -432,3 +432,7 @@ def what_next():
         ),
         vertical="middle",
     )
+
+
+if __name__ == "__main__":
+    present(__file__)
